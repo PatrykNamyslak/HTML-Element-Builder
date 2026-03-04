@@ -1,0 +1,18 @@
+{
+    "name": "patryknamyslak/html-element-builder",
+    "description": "A simple yet powerful HTML element builder.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PatrykNamyslak\\Builders\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Patryk",
+            "email": "contact@patryknamyslak.pl"
+        }
+    ],
+    "require": {}
+}
