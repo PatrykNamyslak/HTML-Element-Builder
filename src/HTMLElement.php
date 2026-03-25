@@ -1,9 +1,6 @@
 <?php
 namespace PatrykNamyslak\Builders;
 
-use InvalidArgumentException;
-
-
 class HtmlElement{
 
     /**
@@ -23,7 +20,7 @@ class HtmlElement{
     }
 
     public function prependContents(string $contents): static{
-        $this->contents = $contents . $this->contents;
+        $this->contents = "{$contents} {$this->contents}";
         return $this;
     }
     public function contents(string $contents): static{
@@ -39,21 +36,25 @@ class HtmlElement{
     /**
      * `Limited` version of `HtmlElement::attributes()` method, limits to only `one` attribute at a time. `Ideal for chaining`!
      * @param array $attribute
-     * @throws InvalidArgumentException
-     * @return never
+     * @throws \InvalidArgumentException
+     * @return static
      */
     public function attribute(array $attribute): static{
         if (count($attribute) > 1){
-            throw new InvalidArgumentException('$attribute cannot contain more than one attribute, please call ' . self::class . "::attributes() to set multiple attributes");
+            throw new \InvalidArgumentException('$attribute cannot contain more than one attribute, please call ' . self::class . "::attributes() to set multiple attributes");
         }
         $this->attributes($attribute);
         return $this;
     }
     /**
-     * @param string[] $attributes Expects an associative array, this method will `OVERWRITE` any existing attributes.
+     * @param string[] $attributes Expects an associative array.
      * @return HtmlElement
      */
     public function attributes(array $attributes): static{
+        // if the array provided is NOT an associative array
+        if (array_is_list($attributes)){
+            throw new \InvalidArgumentException('$attributes must be an associative array!');
+        }
         foreach($attributes as $attributeName => $attributeValue){
             $this->attributes[$attributeName] = $attributeValue;
         }

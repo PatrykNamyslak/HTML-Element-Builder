@@ -14,5 +14,7 @@
             "email": "contact@patryknamyslak.pl"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^8.4.0"
+    }
 }
